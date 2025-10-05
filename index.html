@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Rasmalayi’s Little Corner ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1: #fff0f6;
+    --bg2: #fff6e8;
+    --accent: #ff6f91;
+    --muted: #5a4b6f;
+    --glass: rgba(255,255,255,0.7);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    color: #222;
+    overflow-x:hidden;
+  }
+
+  /* FULLSCREEN INTRO OVERLAY */
+  .intro-overlay{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(circle at 30% 20%, rgba(255,111,145,0.06), transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255,235,179,0.06), transparent 10%),
+                rgba(0,0,0,0.02);
+    z-index:999;
+    backdrop-filter: blur(4px);
+    flex-direction:column;
+    padding:20px;
+  }
+  .kuromi-card{
+    width:320px; max-width:90%;
+    background: linear-gradient(180deg,#fff,#fff8fb);
+    border-radius:20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    padding:18px; text-align:center;
+    transform: translateY(0);
+    animation: popIn 700ms ease-out;
+  }
+  @keyframes popIn{
+    from{transform: translateY(20px) scale(0.98); opacity:0}
+    to{transform: translateY(0) scale(1); opacity:1}
+  }
+
+  .kuromi-img{
+    width:170px; height:170px; margin:auto; display:block;
+    object-fit:cover; border-radius:20px;
+    transform-origin:center;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform: translateY(0)}
+    50%{transform: translateY(-12px)}
+  }
+
+  .intro-title{font-family:'Patrick Hand', cursive; font-size:28px; color:var(--accent); margin:12px 0 6px}
+  .intro-text{font-size:15px; color:var(--muted); margin-bottom:14px}
+  .open-letter{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--accent), #ff9ab8);
+    color:white; font-weight:600;
+    cursor:pointer;
+    box-shadow: 0 8px 22px rgba(255,111,145,0.14);
+    transition:transform .14s ease;
+  }
+  .open-letter:active{transform:scale(.98)}
+
+  /* MAIN SITE */
+  .site {
+    max-width:900px;
+    margin:60px auto;
+    padding:24px;
+    text-align:center;
+  }
+  h1{font-family:'Patrick Hand', cursive; font-size:44px; color:var(--accent); margin:6px 0}
+  p.lead{font-size:18px; color:#333; line-height:1.6; margin:18px auto; max-width:760px}
+
+  /* hearts background */
+  .hearts{position:fixed; inset:0; pointer-events:none; z-index:0;}
+  .heart{position:absolute; width:22px; height:22px; background:var(--accent); transform:rotate(45deg); opacity:.95}
+  .heart:before,.heart:after{content:""; position:absolute; width:22px;height:22px;background:var(--accent); border-radius:50%}
+  .heart:before{top:-11px; left:0} .heart:after{left:11px; top:0}
+
+  /* couple comic panel */
+  .comic {
+    margin:28px auto; max-width:780px; border-radius:16px;
+    padding:14px; background: linear-gradient(180deg,#fffaff, #fff0f6);
+    box-shadow: 0 10px 30px rgba(128,0,128,0.06);
+    display:flex; gap:16px; align-items:center; justify-content:center; flex-wrap:wrap;
+  }
+  .comic-img{
+    width:260px; height:220px; object-fit:cover; border-radius:12px; border:6px solid rgba(255,255,255,0.8);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+  .comic-panel{
+    text-align:left; max-width:360px;
+  }
+  .comic-panel h3{margin:0; font-family:'Patrick Hand', cursive; color:#c43b78}
+  .bubble{
+    margin-top:8px; display:inline-block; padding:10px 14px; border-radius:18px; background:var(--glass);
+    font-size:14px; color:var(--muted); box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  }
+
+  /* Spotify list */
+  .songs{display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-top:28px; align-items:center}
+  .song-card{background:rgba(255,255,255,0.7); padding:12px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+  .song-caption{font-size:14px; margin-bottom:8px; color:var(--muted); font-weight:600}
+
+  /* cat meme + last warning */
+  .cat-wrap{margin:34px auto; max-width:700px; text-align:center}
+  .cat-img{width:320px; height:220px; object-fit:cover; border-radius:12px; display:block; margin:0 auto 12px; border:6px solid rgba(255,255,255,0.85)}
+  .last-warning{display:inline-block; padding:6px 12px; background:#ffccd5; color:#6a1336; border-radius:999px; font-weight:700; letter-spacing:.6px; box-shadow:0 8px 18px rgba(255,111,145,0.12)}
+
+  /* apology card */
+  .sorry-card{margin:18px auto; max-width:760px; background:linear-gradient(180deg,#fff,#fff8fb); padding:18px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.06); text-align:left}
+  .sorry-card h4{font-family:'Patrick Hand', cursive; color:var(--accent); margin:0 0 6px}
+  .sorry-card p{color:var(--muted); line-height:1.6; margin:0}
+
+  /* responsive */
+  @media (max-width:640px){
+    h1{font-size:34px}
+    .kuromi-img{width:150px;height:150px}
+    .comic-img{width:200px;height:160px}
+    .song-card iframe{width:100% !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" aria-hidden="true"></div>
+
+<!-- INTRO OVERLAY -->
+<div class="intro-overlay" id="intro">
+  <div class="kuromi-card" role="dialog" aria-label="special message">
+    <!-- Placeholder - replace assets/kuromi.gif with your Kuromi gif/image -->
+    <img src="assets/kuromi.gif" alt="cute pop-up" class="kuromi-img" id="kuromi">
+    <div class="intro-title">Psst… something special is coming ✨</div>
+    <div class="intro-text">Tamatar made a tiny surprise — a little letter for Rasmalayi. Tap the letter when you’re ready 💌</div>
+    <div class="open-letter" id="openBtn">Open the letter</div>
+  </div>
+</div>
+
+<!-- MAIN SITE -->
+<main class="site" id="main" style="opacity:0; transform: translateY(12px); transition:all .6s ease;">
+  <h1>Hey Rasmalayi! 🫶</h1>
+  <p class="lead">
+    So… I made this little corner just for you 😏✨
+    Here, you’ll find some tiny surprises, songs that kinda feel like us,
+    and a bunch of silly little things that made me think of you 😌💫
+    Hope it makes you smile, laugh, or just feel a little spark of “aww, that’s cute” while you explore it! 💛
+    P.S. Don’t be too surprised if it feels like a tiny adventure—because it kinda is 😉🎶
+  </p>
+
+  <!-- comic couple -->
+  <section class="comic" aria-labelledby="this-is-us">
+    <!-- Replace assets/couple.png with your anime-couple image (Spidey+Gwen style or any anime couple) -->
+    <img src="assets/couple.png" alt="anime couple" class="comic-img">
+    <div class="comic-panel">
+      <h3 id="this-is-us">This is us 💖</h3>
+      <div class="bubble">Little comics, soft blush, and stolen glances — my favorite story with you.</div>
+      <div style="margin-top:10px" class="bubble">Anime vibes + silly hearts = Tamatar x Rasmalayi energy ✨</div>
+    </div>
+  </section>
+
+  <!-- Spotify section -->
+  <section class="songs" aria-label="songs">
+    <div class="song-card">
+      <div class="song-caption">🎵 This one made me think of you all night 🌙✨</div>
+      <iframe src="https://open.spotify.com/embed/track/5cF0dROlMOK5uNZtivgu50" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <div class="song-card">
+      <div class="song-caption">🎵 Just a little ordinary thing that feels special with you 💛</div>
+      <iframe src="https://open.spotify.com/embed/track/6qqrTXSdwiJaq8SO0X2lSe" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <div class="song-card">
+      <div class="song-caption">🎵 Sweet vibes, a little flirty just like us 😉</div>
+      <iframe src="https://open.spotify.com/embed/track/08GYLNhKthS3arMdXsveRI" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <div class="song-card">
+      <div class="song-caption">🎵 A little wild, a little deep… kinda like my thoughts about you 😏</div>
+      <iframe src="https://open.spotify.com/embed/track/2LBqCSwhJGcFQeTHMVGwy3" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <div class="song-card">
+      <div class="song-caption">🎵 Cozy vibes… snowman energy for you ❄️💛</div>
+      <iframe src="https://open.spotify.com/embed/track/7uoFMmxln0GPXQ0AcCBXRq" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+  </section>
+
+  <!-- cat meme + last warning -->
+  <section class="cat-wrap" aria-label="cat meme">
+    <!-- Replace assets/cat.jpg with your cat meme image -->
+    <img src="assets/cat.jpg" alt="funny cat meme" class="cat-img">
+    <div class="last-warning">LAST WARNING</div>
+
+    <div class="sorry-card" style="margin-top:14px">
+      <h4>I'm really sorry.</h4>
+      <p>
+        I’m truly sorry for the times I messed up or made you upset. I promise to listen better,
+        be kinder, and show you more care every day — because you deserve someone who makes you
+        feel safe and smile. I’ll try harder, and I want to make more good memories with you.
+        Please give me a chance to prove it. 💛
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // small hearts floating in background
+  function spawnHeart(){
+    const c = document.createElement('div');
+    c.className = 'heart';
+    const size = 14 + Math.random()*18;
+    c.style.width = size + 'px'; c.style.height = size + 'px';
+    c.style.left = (10 + Math.random()*80) + 'vw';
+    c.style.top = (80 + Math.random()*20) + 'vh';
+    c.style.opacity = 0.9 - Math.random()*0.6;
+    c.style.transition = 'transform 5s linear, top 5s linear, opacity 1.2s linear';
+    document.querySelector('.hearts').appendChild(c);
+    // animate to top
+    requestAnimationFrame(()=> {
+      c.style.transform = 'translateY(-120vh) rotate(360deg)';
+      c.style.top = '-10vh';
+      c.style.opacity = 0;
+    });
+    setTimeout(()=> c.remove(), 5200);
+  }
+  setInterval(spawnHeart, 450);
+
+  // intro open letter interaction
+  const openBtn = document.getElementById('openBtn');
+  const intro = document.getElementById('intro');
+  const main = document.getElementById('main');
+
+  openBtn.addEventListener('click', ()=> {
+    // small "letter opening" animation
+    openBtn.textContent = "Opening...";
+    setTimeout(()=> {
+      intro.style.transition = 'opacity .6s ease, transform .6s ease';
+      intro.style.opacity = 0;
+      intro.style.transform = 'scale(.98) translateY(-10px)';
+      setTimeout(()=> { intro.style.display = 'none'; 
+        main.style.opacity = 1; main.style.transform = 'translateY(0)';
+        window.scrollTo({top:0, behavior:'smooth'});
+      }, 650);
+    }, 450);
+  });
+
+  // Accessibility: allow Esc to skip intro
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && intro.style.display !== 'none'){
+      intro.style.display = 'none';
+      main.style.opacity = 1; main.style.transform = 'translateY(0)';
+    }
+  });
+</script>
+</body>
+</html>
